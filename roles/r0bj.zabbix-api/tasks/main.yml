@@ -1,0 +1,30 @@
+---
+
+
+
+- name: sync host with zabbix
+  zabbix_api:
+    action=sync_host
+    hostname={{ inventory_hostname }}
+    ipv4={{ ansible_default_ipv4.address }}
+    default_group={{ zabbix_default_group }}
+    groups="{{ zabbix_groups }}"
+    templates="{{ zabbix_templates }}"
+    macros="{{ zabbix_macros }}"
+    api_url={{ zabbix_url }}
+    api_user={{ zabbix_user }}
+    api_password={{ zabbix_password }}
+    api_basic_auth_user={{ zabbix_basic_auth_user }}
+    api_basic_auth_password={{ zabbix_basic_auth_password }}
+
+- name: disable invalid zabbix hosts
+  zabbix_api:
+    action=disable_invalid
+    default_group={{ zabbix_default_group }}
+    all_hosts="{{ groups.all|join(',') }}"
+    api_url={{ zabbix_url }}
+    api_user={{ zabbix_user }}
+    api_password={{ zabbix_password }}
+    api_basic_auth_user={{ zabbix_basic_auth_user }}
+    api_basic_auth_password={{ zabbix_basic_auth_password }}
+  run_once: yes

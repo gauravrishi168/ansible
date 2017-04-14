@@ -1,0 +1,12 @@
+---
+#- hosts: eu-west-1
+##  remote_user:  ec2-user
+##  sudo: True
+##  roles:
+##   - zabix-server
+##
+- hosts: localhost
+  remote_user:  root
+  roles:
+   - zabix-server
+

@@ -1,0 +1,69 @@
+#- name: Install Zabbix Repository Key
+#  rpm_key: state=present key=http://repo.zabbix.com/RPM-GPG-KEY-ZABBIX
+
+#- name: Install Zabbix Repository and other packages needed by Ansible
+#  yum: pkg={{item}} state=installed
+#  with_items:
+#    - policycoreutils-python
+#    - libselinux-python
+#    - MySQL-python
+#    - http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
+
+- name: Add MariaDB Repo
+  template:
+    src=MariaDB.repo
+    dest=/etc/yum.repos.d/MariaDB.repo
+    owner=root
+    group=root
+    mode=0640
+
+- name: Install MariaDB packages
+  yum: pkg={{item}} state=installed
+  with_items:
+    - mariadb-server
+
+- name: Install Zabbix packages
+  yum: pkg={{item}} state=installed
+  with_items:
+    - zabbix-server-mysql
+    - zabbix-web-mysql
+
+- name: Run MariaDB
+  service: name=mariadb enabled=true state=restarted
+  tags: initial
+
+- name: Create Zabbix Database
+  mysql_db: name=zabbix state=present collation=utf8_bin
+
+- name: Create Zabbix user and grant permissions
+  mysql_user: name=zabbix password=zabbix priv=zabbix.*:ALL host=localhost state=present
+
+- name: Import initial schema
+  mysql_db: name=zabbix state=import target={{item}}
+  with_items:
+    - /usr/share/doc/zabbix-server-mysql-3.0.8/create.sql
+  ignore_errors: true
+
+- name: Copy Zabbix Config
+  template:
+    src=zabbix_server.conf
+    dest=/etc/zabbix/zabbix_server.conf
+    owner=root
+    group=root
+    mode=0610
+
+- name: Add Httpd Config
+  template:
+    src=zabbix.conf
+    dest=/etc/httpd/conf.d/zabbix.conf
+    owner=root
+    group=root
+    mode=0641
+
+
+- name: Run MariaDB
+  service: name=httpd enabled=true state=restarted
+
+- name: Restart Zabbix Server
+  service: name=zabbix-server enabled=true state=restarted
+

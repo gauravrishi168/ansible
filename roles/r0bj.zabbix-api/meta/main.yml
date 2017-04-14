@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  author: Robert Jerzak
+  description: Synchronizes hosts state (groups, templates, macros) with Zabbix.
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+  - name: EL
+    versions:
+      - 5
+      - 6
+      - 7
+  - name: Ubuntu
+    versions:
+      - precise
+      - quantal
+      - raring
+      - saucy
+      - trusty
+      - wily
+  - name: Debian
+    versions:
+      - wheezy
+  galaxy_tags:
+  - monitoring
+  - zabbix
+dependencies: []
+  

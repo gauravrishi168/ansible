@@ -1,0 +1,22 @@
+---
+- hosts: gaurav
+  remote_user:  root
+
+
+- name: Updat
+  ignore_errors: True
+  local_action:
+    module: zabbix_host
+    server_url: http://192.168.112.150/zabbix/api_jsonrpc.php
+    login_user: admin
+    login_password: zabbix
+    host_name: "{{ ansible_hostname }}"
+    interfaces:
+      - type: 1
+        main: 1
+        ip: "{{ ansible_default_ipv4.address }}"
+        port: 10050
+        useip: 1
+
+
+

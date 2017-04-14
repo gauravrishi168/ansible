@@ -1,0 +1,4 @@
+- name: zabbix API
+  hosts: node1
+  roles:
+    - role: zabbix-agent-master

@@ -1,0 +1,16 @@
+---
+- hosts: security_group_Webserver
+  remote_user:  ec2-user
+  sudo: True
+  vars:
+   user_list: papa, papa1, papa2, papa3
+
+  tasks:
+  - name: Creating User in nodes
+    user: name={{item}} state=present
+    with_items:
+    - papa
+    - papa1
+    - papa2
+    - papa3
+

@@ -1,0 +1,4 @@
+- name: zabbix API
+  hosts: gaurav
+  roles:
+    - role: r0bj.zabbix-api

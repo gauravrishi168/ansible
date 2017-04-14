@@ -1,0 +1,19 @@
+---
+
+zabbix_default_group: ansible
+#zabbix_templates: ''
+#zabbix_groups: ''
+#zabbix_macros: ''
+#zabbix_url: 'http://192.168.112.150/zabbix/api_jsonrpc.php'
+#zabbix_user: ''
+#zabbix_password: ''
+zabbix_basic_auth_user: 'admin'
+zabbix_basic_auth_password: 'zabbix'
+#
+zabbix_url: 'http://192.168.112.150/zabbix/api_jsonrpc.php'
+zabbix_user: 'admin'
+zabbix_password: 'zabbix'
+  
+zabbix_templates: 'mysql'
+zabbix_groups: 'Zabbix servers'
+zabbix_macros: '{$PAGE_STRING},Welcome on main page,{$SNMP_COMMUNITY},public'
