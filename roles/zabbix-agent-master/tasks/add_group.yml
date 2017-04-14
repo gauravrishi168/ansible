@@ -1,0 +1,14 @@
+---
+# Add New Group in zabbix-Server
+
+- name: Install Zabbix New Group
+  local_action:
+    module: zabbix_group
+    server_url: "{{ server_url }}"
+    login_user: "{{ login_user }}"
+    login_password: "{{ login_password }}"
+    state: present
+    host_groups:
+      - group1
+      - group2
+
