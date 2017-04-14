@@ -6,8 +6,8 @@
   - name: Creating new Security group
     ec2_group:
       name: Webserver
-      aws_access_key: AKIAJKQIDA2EBEI2MHQQ
-      aws_secret_key: 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
+      aws_access_key:
+      aws_secret_key: 
       description: Creating SSH Policy for aws
       region: eu-west-1
       rules:
@@ -31,8 +31,8 @@
      instance_tags:
       Name: vert1
      region: eu-west-1
-     aws_access_key: AKIAJKQIDA2EBEI2MHQQ
-     aws_secret_key: 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
+     aws_access_key: 
+     aws_secret_key: 
     register: ec2
 
   - name: Add instance to aws
