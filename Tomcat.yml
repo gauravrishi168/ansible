@@ -1,0 +1,53 @@
+---
+- name: Installing Tomcat
+  hosts: Apache
+  remote_user: root
+  vars_files:
+  - vars.yml
+
+  tasks:
+
+   - name: check if the Download File exists
+     stat: 
+      path: /root/httpd-2.2.32.tar.gz
+     register: check
+
+   - name: Register the output of the 'uptime' command.
+     command: uptime
+     register: system_uptime
+
+   - debug: var=system_uptime.stdout
+
+#   - name: Download the Apache
+#     get_url: 
+#      url: http://redrockdigimark.com/apachemirror//httpd/httpd-2.2.32.tar.gz
+#      dest: /root/
+#      timeout: 180
+#      when: check.stat.exists == false
+
+#  - name: Extracing file
+#    shell: tar -xvf /root/httpd-2.2.32.tar.gz; cp -rf httpd-2.2.32 /opt
+
+#  - name: check the file statu
+#    stat: 
+#     path: /opt/httpd-2.2.32/
+#    register: file
+
+#  - debug: 
+#     msg: httpd directory file exists
+#     when: file.stat.path is defined
+
+#  - name: Installing httpd with source command
+#    shell: cd /opt/httpd-2.2.32/ ; ./configure --prefix=/usr/httpd ; make ; make install
+ 
+
+   - name: change the Apache port
+     lineinfile: 
+      dest: /usr/httpd/conf/httpd.conf
+      regexp: '^Listen 80'
+      line: 'Listen 8080'
+      backup: yes
+      when: check.stat.exists == false
+
+   - name: Restart the apache
+     shell: cd /usr/httpd/bin ; ./apachectl start 

@@ -1,0 +1,10 @@
+---
+- hosts: Apache
+  user:  root
+  vars:
+   motd_welcome: 'This is Welcome page'
+  tasks:
+   - name: Adding user to the database
+     mysql_user:
+      login_user: root
+      login_password: newpass

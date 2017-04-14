@@ -1,0 +1,7 @@
+- name: Create the instance
+  hosts: localhost
+  vars: 
+   contents: " {{ lookup('file', '/etc/ansible/file/gaurav') }}"
+
+  tasks:
+  - debug: msg="the value of foo.txt is {{ contents }}"

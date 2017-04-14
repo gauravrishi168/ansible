@@ -1,0 +1,15 @@
+---
+- hosts: Apache
+  remote_user:  root
+  tasks:
+  - name: Copy the tar file
+    copy: src=file/etc.tar.gz dest=/nfs
+
+  - name: Extracing the file 
+    command: "{{ item }} chdir=/nfs"
+    with_items:
+    - tar -xvf etc.tar.gz
+    - mv etc gaurav
+
+  
+

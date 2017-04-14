@@ -1,0 +1,10 @@
+---
+- hosts: Apache
+  remote_user:  root
+  vars:
+   user_list: [ papa, papa1, papa2, papa3 ]
+
+  tasks:
+  - name: Creating User in nodes
+    user: name={{item}} state=absent remove=yes
+    with_items: "{{user_list}}"

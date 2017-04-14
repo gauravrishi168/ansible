@@ -1,0 +1,6 @@
+---
+- name: updating NTP and Mysql database
+  hosts: Apache
+  remote_user:  root
+  roles: 
+  - apache

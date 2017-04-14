@@ -1,0 +1,11 @@
+- name: docker Management tasks
+  hosts: Apache
+
+  tasks:
+  - name: data container
+    docker:
+      name: mydata
+      image: hello-world
+      state: present
+      volumes:
+      - /nfs

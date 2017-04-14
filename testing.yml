@@ -1,0 +1,11 @@
+---
+- hosts: Apache
+  user:  root
+  tasks:
+   - name: Copy and open the tar
+     copy: src=file/epel-release-latest-6.noarch.rpm dest=/tmp
+   - name: installing the EPLE Package
+     command: rpm -ivh /tmp/epel-release-latest-6.noarch.rpm
+     args:
+      chdir: /tmp
+      creates: gaurav

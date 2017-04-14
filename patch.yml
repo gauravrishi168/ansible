@@ -1,0 +1,19 @@
+- name: Patach Management tasks
+  hosts: Apache
+
+  tasks:
+  - name: Check wether service http service is running or not ?
+    shell:  if ps -eaf |egrep httpd |grep -v grep >/dev/null; then echo "Process_running"; else echo "Process_not_running"; fi
+    ignore_errors: true
+    register: app_process_check
+
+
+  - name: Decsion point on application status
+    fail: msg="{{ ansible_hostname }} have running application. Please stop the application on that server"
+    when: app_process_check.stdout == "Process_running"
+
+  - name: update the Pactch
+    yum: name=kernel state=latest
+    when: app_process_check.stdout == "Process_not_running"
+    register: yum update
+

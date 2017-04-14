@@ -1,0 +1,41 @@
+---
+- hosts: Apache
+  user:  root
+  vars:
+   motd_welcome: 'This is Welcome page'
+  tasks:
+   - name: Copy motd_welcome
+     copy:
+      dest: /tmp/rishi1
+      content: "{{motd_welcome}}"
+   - name: Installing Mysql
+     action: yum name=mysql-server state=installed
+   - name: Starting the Mysql Service
+     service:
+      name: mysqld
+      state: restarted     
+   - name: Copy install.log file to /tmp
+     copy: 
+      src: file/gaurav
+      dest: /tmp/gaurav
+   - name: Creating User on node
+     user: 
+      name: akshay
+      comment: This is for Akshay user
+      shell: /bin/bash
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      ssh_key_type: rsa
+   - name: Create a new database with name 'bobdata'
+     mysql_db:
+      name: bobdata
+      login_user: root
+      login_password: newpass
+      state: present
+   - name: Adding user to the database
+     mysql_user:
+      name: bob
+      password: 12345
+      priv: '*.*:ALL,GRANT'
+      state: present

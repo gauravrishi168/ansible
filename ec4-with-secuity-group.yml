@@ -1,0 +1,58 @@
+- name: Create the instance
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: Creating new Security group
+    ec2_group:
+      name: Webserver
+      aws_access_key: AKIAJKQIDA2EBEI2MHQQ
+      aws_secret_key: 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
+      description: Creating SSH Policy for aws
+      region: eu-west-1
+      rules:
+       - proto: tcp
+         from_port: 80
+         to_port: 80
+         cidr_ip: 0.0.0.0/0
+       - proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: 0.0.0.0/0
+
+  - name: Launch Instance
+    ec2:
+     key_name: id_rsa
+     group: Webserver
+     instance_type: t2.micro
+     image: ami-02ace471
+     wait: true
+     count: 1
+     instance_tags:
+      Name: vert1
+     region: eu-west-1
+     aws_access_key: AKIAJKQIDA2EBEI2MHQQ
+     aws_secret_key: 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
+    register: ec2
+
+  - name: Add instance to aws
+    add_host:
+     hostname: "{{ item.public_ip }}"
+     groupname: launched
+    with_items: "{{ ec2.instances }}"
+    ignore_errors: true
+
+
+  - name: Wait for the host to UP
+    wait_for:
+     host: "{{ item.public_dns_name }}"
+     port: 22
+     delay: 30
+     timeout: 300
+     state: started
+    with_items: "{{ ec2.instances }}"
+ 
+
+
+
+  

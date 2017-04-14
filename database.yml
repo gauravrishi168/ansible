@@ -1,0 +1,8 @@
+---
+- hosts: Apache
+  user:  root
+  tasks:
+  - name: Adding mysql user
+    mysql_db:
+      name: gaurav
+      state: present

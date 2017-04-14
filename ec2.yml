@@ -1,0 +1,18 @@
+- name: Create the instance
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+  - name: Launch Instance
+    ec2:
+     key_name: id_rsa
+     group: default
+     instance_type: t2.micro
+     image: ami-02ace471
+     wait: true
+     region: eu-west-1
+     aws_access_key: AKIAJKQIDA2EBEI2MHQQ
+     aws_secret_key: 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
+    register: ec2
+  - name: Print all EC2 variable
+    debug: var=ec2 

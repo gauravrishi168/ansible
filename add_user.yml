@@ -1,6 +1,7 @@
 ---
-- hosts: apache
-  remote_user:  root
+- hosts: security_group_Webserver
+  remote_user:  ec2-user
+  sudo: True
   vars:
    user_list: papa, papa1, papa2, papa3
 

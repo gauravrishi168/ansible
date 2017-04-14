@@ -1,0 +1,37 @@
+---
+- hosts: nfs_clients
+  remote_user:  root
+  tasks:
+  - name: Creating User in nodes
+    file:
+     path: /nfs
+     state: directory
+     mode: 0775
+  
+  - name:  mount the directory to the NFS
+    mount:
+     name: /nfs 
+     src: 192.168.112.129:/nfs
+     fstype: nfs 
+     opts: defaults 
+     dump: 0 
+     passno: 2
+     state: mounted
+
+  - name: Check the date command 
+    shell: date
+    register: results
+
+  - debug: msg="The command run successfuly"
+    when: results | success
+
+  - name: check hello
+    shell: getenforce
+    register: seestatus
+
+  - name: Install Apache when Selinux Enable
+    yum: name=httpd state=lastest
+    when: seestatus.rc !=0
+
+  
+

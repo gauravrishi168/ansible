@@ -1,0 +1,9 @@
+---
+ - name: Creating User in nodes
+   user: name={{item}} state=present
+   with_items:
+   - papa
+   - papa1
+   - papa2
+   - papa3
+
