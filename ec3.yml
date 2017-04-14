@@ -16,8 +16,8 @@
          image: "{{ image }}"
          wait: true
          region: "{{ region }}"
-         aws_access_key: AKIAISYNP2YHFGD2X5QA
-         aws_secret_key: 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
+         aws_access_key: 
+         aws_secret_key: 
       register: ec2
 
     - name: Add new instance to host group
