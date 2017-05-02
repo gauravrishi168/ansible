@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  user:  vagrant
+  sudo: true
+  tasks:
+
+   - name: Creating User on node
+     user:
+      name: akshay
+      comment: This is for Akshay user
+      shell: /bin/bash
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      ssh_key_type: rsa
