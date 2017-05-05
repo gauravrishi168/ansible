@@ -1,0 +1,20 @@
+---
+# tasks file for aws.takesnapshots
+- name: Gaurav_taking_snapstop
+  ec2_snapshot:
+#    aws_secret_key: "{{ vault.aws_secret_key }}"
+#    aws_access_key: "{{ vault.aws_access_key }}"
+#    region: "{{ vault.region }}"
+    aws_secret_key: cOQWu08AnGoxYBDHFMNRNR5YhbciXxTXOKuyC8RB
+    aws_access_key: AKIAIU5B3LXTJDQBKVWA
+    region: eu-west-1
+    instance_id: "{{ item.id }}"
+    device_name: "{{ item.root_device_name }}"
+    description: "awsbackup snapshot taken on {{ ansible_date_time.date }} at {{ ansible_date_time.time }}"
+    snapshot_tags:
+      Name: "{{ item.tags.Name }}_{{ INCREMENTAL }}_{{ ansible_date_time.date }}"
+#      Name: "{{ ansible_date_time.date }}"
+      identifier: awsbackup
+      instance: "{{ item.tags.Name }}"
+      incremental: "{{ INCREMENTAL }}"
+  with_items: "{{ ec2_facts.instances }}"
