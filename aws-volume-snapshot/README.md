@@ -1,21 +1,10 @@
-# awsbackup.yml and awsbackup.py
+# awsbackup.yml
 
-This is both an awsbackup.yml playbook and the equivalent awsbackup.py python script.  I wanted to share both as they are nearly identical in functionality.
-
+This is an awsbackup.yml playbook.  
 Example run:
 
 ```
-ansible-playbook --vault-password-file ~/.ansible/myvaultpassword -i inventory/localhost awsbackup.yml -e "INCREMENTAL=daily COUNT=3"
-```
-
-# ansible-vault
-
-The Ansible vault file is kept under ```group_vars/all/vault.yml```.  It has the following structure:
-
-```
-vault:
-  aws_secret_key: SECRET_KEY
-  aws_access_key: ACCESS_KEY
+ansible-playbook -i inventory/localhost awsbackup.yml -e "INCREMENTAL=daily COUNT=3"
 ```
 
 # AWS policy
