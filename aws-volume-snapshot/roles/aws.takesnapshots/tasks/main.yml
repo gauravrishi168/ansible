@@ -1,12 +1,12 @@
 ---
 # tasks file for aws.takesnapshots
-- name: Gaurav_taking_snapstop
+- name: Start Taking Snapshot
   ec2_snapshot:
 #    aws_secret_key: "{{ vault.aws_secret_key }}"
 #    aws_access_key: "{{ vault.aws_access_key }}"
 #    region: "{{ vault.region }}"
-    aws_secret_key: cOQWu08AnGoxYBDHFMNRNR5YhbciXxTXOKuyC8RB
-    aws_access_key: AKIAIU5B3LXTJDQBKVWA
+    aws_secret_key: 
+    aws_access_key: 
     region: eu-west-1
     instance_id: "{{ item.id }}"
     device_name: "{{ item.root_device_name }}"
