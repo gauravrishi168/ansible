@@ -6,8 +6,8 @@
 #    aws_access_key: "{{ vault.aws_access_key }}"
 #    region: "{{ vault.region }}"
 
-    aws_secret_key: cOQWu08AnGoxYBDHFMNRNR5YhbciXxTXOKuyC8RB
-    aws_access_key: AKIAIU5B3LXTJDQBKVWA
+    aws_secret_key: 
+    aws_access_key: 
     region: eu-west-1
     filters:
       "tag:backup": "yes"
