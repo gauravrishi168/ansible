@@ -5,8 +5,8 @@
 #    aws_secret_key: "{{ vault.aws_secret_key }}"
 #    aws_access_key: "{{ vault.aws_access_key }}"
 
-    aws_secret_key: cOQWu08AnGoxYBDHFMNRNR5YhbciXxTXOKuyC8RB
-    aws_access_key: AKIAIU5B3LXTJDQBKVWA
+    aws_secret_key: 
+    aws_access_key:
 #    region: "{{ vault.region }}"
     region: eu-west-1
     filters:
