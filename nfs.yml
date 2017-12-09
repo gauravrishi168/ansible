@@ -10,7 +10,7 @@
      path: /nfs
      state: directory
      mode: 0775
-  
+#done     
   - name:  mount the directory to the NFS
     mount:
      name: /nfs 
