@@ -2,7 +2,7 @@
 - name: Testing Loop
   hosts: Apache
   remote_user: root
-
+#test
   tasks:
   - name: Loop over environment facts
     debug: msg={{item.key}}={{item.value}}
